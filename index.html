@@ -4,332 +4,437 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buddhika Jayasanka - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Custom animations */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .premium-badge {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo fade-in">
-                    <a href="#about">BJ</a>
+<body class="font-['Poppins'] bg-slate-50 text-slate-800">
+    <!-- 3D Canvas Containers -->
+    <div id="hero-canvas" class="canvas-container fixed top-0 left-0 w-full h-full z-10 pointer-events-none bg-gradient-to-br from-slate-900 to-slate-800"></div>
+    <div id="skills-canvas" class="canvas-container absolute top-0 left-0 w-full h-full z-10 pointer-events-none opacity-0 transition-opacity duration-500"></div>
+    <div id="projects-canvas" class="canvas-container absolute top-0 left-0 w-full h-full z-10 pointer-events-none opacity-0 transition-opacity duration-500"></div>
+
+    <header class="fixed top-0 left-0 w-full bg-slate-900 text-white z-50 shadow-lg py-3">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex justify-between items-center">
+                <div class="logo">
+                    <a href="#about" class="text-2xl font-bold border-2 border-blue-600 px-3 py-1 rounded transition-all duration-300 hover:bg-blue-600 hover:text-white hover:-translate-y-0.5">BJ</a>
                 </div>
-                <nav id="navbar" class="fade-in">
-                    <ul>
-                        <li><a href="#about" class="nav-link active">About</a></li>
-                        <li><a href="#experience" class="nav-link">Experience</a></li>
-                        <li><a href="#education" class="nav-link">Education</a></li>
-                        <li><a href="#skills" class="nav-link">Skills</a></li>
-                        <li><a href="#projects" class="nav-link">Projects</a></li>
-                        <li><a href="#interests" class="nav-link">Interests</a></li>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-6">
+                        <li><a href="#about" class="nav-link active font-medium relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">About</a></li>
+                        <li><a href="#experience" class="nav-link font-medium relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Experience</a></li>
+                        <li><a href="#education" class="nav-link font-medium relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Education</a></li>
+                        <li><a href="#skills" class="nav-link font-medium relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Skills</a></li>
+                        <li><a href="#projects" class="nav-link font-medium relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Projects</a></li>
+                        <li><a href="#interests" class="nav-link font-medium relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Interests</a></li>
                     </ul>
-                    <div class="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </div>
                 </nav>
+                <div class="menu-toggle md:hidden text-2xl cursor-pointer">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </header>
 
-    <main>
-        <!-- About Section -->
-        <section id="about" class="section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text slide-in-left">
-                        <h1>Hello, I'm <span class="highlight">Buddhika Jayasanka</span></h1>
-                        <h2 class="subtitle">Software Developer</h2>
-                        <p class="contact-info">
-                            <i class="fas fa-map-marker-alt"></i> Rathnapura, Sri Lanka
-                            <i class="fas fa-phone ml-3"></i> 071 4826 756
-                            <i class="fas fa-envelope ml-3"></i> infobuddhika@icloud.com
-                        </p>
-                        <p class="bio">
-                            I am a student software developer with the ability to adapt to any technology stack. I excel at working under pressure and am excited to learn new technologies. I always deliver on time and remain agile in any condition. Open-minded and passionate about contributing to open source projects.
-                        </p>
-                        <div class="social-links-hero">
-                            <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
-                        </div>
-                        <a href="#" class="btn primary-btn">Download CV</a>
+<main class="relative z-20">
+    <!-- About Section -->
+    <section id="about" class="min-h-screen flex items-center relative pt-20 pb-16">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">
+                        Hello, I'm <span class="text-blue-500">Buddhika Jayasanka</span>
+                    </h1>
+                    <h2 class="text-2xl text-blue-400 mb-6">Software Developer</h2>
+                    <div class="flex flex-wrap gap-4 mb-6 text-gray-300">
+                        <span class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i> Rathnapura, Sri Lanka</span>
+                        <span class="flex items-center"><i class="fas fa-phone mr-2 text-blue-400"></i> 071 4826 756</span>
+                        <span class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-400"></i> infobuddhika@icloud.com</span>
                     </div>
-                    <div class="about-image slide-in-right">
-                        <div class="cv-photo-container">
-                            <div class="photo-glow"></div>
-                            <img src="pic.jpg" alt="Buddhika Jayasanka" class="cv-photo">
-                        </div>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        I am a student software developer with the ability to adapt to any technology stack. I excel at working under pressure and am excited to learn new technologies. I always deliver on time and remain agile in any condition. Open-minded and passionate about contributing to open source projects.
+                    </p>
+                    <div class="flex gap-4 mb-8">
+                        <a href="#" class="social-btn w-10 h-10 flex items-center justify-center rounded-full bg-white bg-opacity-10 text-white text-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:-translate-y-1 hover:shadow-lg group relative">
+                            <i class="fab fa-github"></i>
+                            <span class="social-tooltip absolute bottom-full mb-2 hidden group-hover:block bg-white text-black px-2 py-1 rounded text-sm whitespace-nowrap">GitHub</span>
+                        </a>
+                        <a href="#" class="social-btn w-10 h-10 flex items-center justify-center rounded-full bg-white bg-opacity-10 text-white text-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:-translate-y-1 hover:shadow-lg group relative">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="social-tooltip absolute bottom-full mb-2 hidden group-hover:block bg-white text-black px-2 py-1 rounded text-sm whitespace-nowrap">LinkedIn</span>
+                        </a>
+                        <a href="#" class="social-btn w-10 h-10 flex items-center justify-center rounded-full bg-white bg-opacity-10 text-white text-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:-translate-y-1 hover:shadow-lg group relative">
+                            <i class="fab fa-twitter"></i>
+                            <span class="social-tooltip absolute bottom-full mb-2 hidden group-hover:block bg-white text-black px-2 py-1 rounded text-sm whitespace-nowrap">Twitter</span>
+                        </a>
+                        <a href="#" class="social-btn w-10 h-10 flex items-center justify-center rounded-full bg-white bg-opacity-10 text-white text-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:-translate-y-1 hover:shadow-lg group relative">
+                            <i class="fas fa-envelope"></i>
+                            <span class="social-tooltip absolute bottom-full mb-2 hidden group-hover:block bg-white text-black px-2 py-1 rounded text-sm whitespace-nowrap">Email</span>
+                        </a>
+                    </div>
+                    <a href="#" class="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-full border-2 border-blue-600 transition-all duration-300 hover:bg-blue-700 hover:border-blue-700 hover:-translate-y-1 hover:shadow-lg">Download CV</a>
+                </div>
+
+                <!-- Static image without animation or badge -->
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white border-opacity-10 shadow-xl">
+                        <img src="pic.jpg" alt="Buddhika Jayasanka" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
 
         <!-- Experience Section -->
-        <section id="experience" class="section">
-            <div class="container">
-                <h2 class="section-title reveal-element">Experience</h2>
-                <div class="section-underline reveal-element"></div>
+        <section id="experience" class="py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 reveal-element">Experience</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-12 reveal-element"></div>
                 
-                <div class="experience-item reveal-element">
-                    <div class="experience-timeline">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
+                <div class="flex reveal-element">
+                    <div class="flex flex-col items-center mr-6">
+                        <div class="w-5 h-5 bg-blue-600 rounded-full mb-4 shadow-lg transition-transform duration-300 hover:scale-125 hover:shadow-xl"></div>
+                        <div class="w-0.5 h-full bg-blue-600"></div>
                     </div>
-                    <div class="experience-content">
-                        <h3>Software Engineer Intern</h3>
-                        <p class="company"><i class="fas fa-building"></i> Ultimate Engineering Solutions Pvt Ltd (Remote)</p>
-                        <p class="date"><i class="far fa-calendar-alt"></i> July 2024 - April 2025</p>
-                        <p class="description">
+                    <div class="flex-1 bg-white rounded-lg shadow-md p-6 mb-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4 border-blue-600">
+                        <h3 class="text-2xl font-bold mb-2">Software Engineer Intern</h3>
+                        <p class="text-blue-600 font-medium mb-2 flex items-center"><i class="fas fa-building mr-2"></i> Ultimate Engineering Solutions Pvt Ltd (Remote)</p>
+                        <p class="text-gray-500 mb-4 flex items-center"><i class="far fa-calendar-alt mr-2"></i> July 2024 - April 2025</p>
+                        <p class="text-gray-700">
                             In 2024, I joined Ultimate Engineering Solutions Pvt Ltd as a Full Stack Developer, where I designed user-friendly interfaces and responsive front-ends using modern UI/UX practices. I developed and maintained full-stack web applications with Angular, Laravel, and MySQL, built scalable backend APIs, and integrated third-party services to enhance functionality. I collaborated closely with cross-functional teams to gather requirements and deliver high-quality software solutions, while actively participating in code reviews, testing, and deployment processes to ensure performance and security. This role allowed me to deepen my technical expertise while contributing to the development of innovative, impactful projects.
                         </p>
                     </div>
-                </div>                
+                </div>
             </div>
         </section>
 
         <!-- Education Section -->
-        <section id="education" class="section education-section">
-            <div class="container">
-              <h2 class="section-title reveal-element">Education</h2>
-              <div class="section-underline reveal-element"></div>
+        <section id="education" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 reveal-element">Education</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-12 reveal-element"></div>
           
-              <div class="education-grid">
-                <!-- Diploma -->
-                <div class="education-item reveal-element">
-                  <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-                  <div class="edu-details">
-                    <h3>Diploma in Software Engineering – DSE</h3>
-                    <p class="institution">CODL Sabaragamuwa University of Sri Lanka (SUSL)</p>
-                    <p class="date">2024</p>
-                    <ul class="courses">
-                      <li>System Analysis and Design</li>
-                      <li>Analysis & Specification</li>
-                      <li>DB Management Systems</li>
-                      <li>Development Tools</li>
-                      <li>Techniques & Programming</li>
-                      <li>Testing & QA</li>
-                    </ul>
-                  </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Diploma -->
+                    <div class="bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl mb-4">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Diploma in Software Engineering – DSE</h3>
+                        <p class="text-gray-600 mb-3">CODL Sabaragamuwa University of Sri Lanka (SUSL)</p>
+                        <p class="text-gray-500 mb-4">2024</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>System Analysis and Design</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Analysis & Specification</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>DB Management Systems</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Development Tools</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Techniques & Programming</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Testing & QA</span>
+                            </li>
+                        </ul>
+                    </div>
+          
+                    <!-- Web Dev -->
+                    <div class="bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element" data-delay="200">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl mb-4">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Web Based Application Development</h3>
+                        <p class="text-gray-600 mb-3">CODL Sabaragamuwa University of Sri Lanka (SUSL)</p>
+                        <p class="text-gray-500">2023</p>
+                    </div>
+          
+                    <!-- English -->
+                    <div class="bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element" data-delay="400">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl mb-4">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Certificate Course in English</h3>
+                        <p class="text-gray-600 mb-3">CODL Sabaragamuwa University of Sri Lanka (SUSL)</p>
+                        <p class="text-gray-500">2022</p>
+                    </div>        
                 </div>
-          
-                <!-- Web Dev -->
-                <div class="education-item reveal-element" data-delay="200">
-                  <div class="edu-icon"><i class="fas fa-laptop-code"></i></div>
-                  <div class="edu-details">
-                    <h3>Web Based Application Development</h3>
-                    <p class="institution">CODL Sabaragamuwa University of Sri Lanka (SUSL)</p>
-                    <p class="date">2023</p>
-                  </div>
-                </div>
-          
-                <!-- English -->
-                <div class="education-item reveal-element" data-delay="400">
-                  <div class="edu-icon"><i class="fas fa-language"></i></div>
-                  <div class="edu-details">
-                    <h3>Certificate Course in English</h3>
-                    <p class="institution">CODL Sabaragamuwa University of Sri Lanka (SUSL)</p>
-                    <p class="date">2022</p>
-                  </div>
-                </div>        
-              </div>
             </div>
-          </section>          
+        </section>          
 
         <!-- Skills Section -->
-        <section id="skills" class="section">
-            <div class="container">
-              <h2 class="section-title reveal-element">Skills</h2>
-              <div class="section-underline reveal-element"></div>
-              <p class="subheading reveal-element">Programming Languages & Tools</p>
+        <section id="skills" class="py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 reveal-element">Skills</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-12 reveal-element"></div>
+                <p class="text-lg text-gray-600 text-center uppercase tracking-wider mb-12 reveal-element">Programming Languages & Tools</p>
           
-              <div class="tech-skills">
-                <div class="tech-skill reveal-element" data-delay="0"><i class="fab fa-angular"></i><span>Angular</span></div>
-                <div class="tech-skill reveal-element" data-delay="50"><i class="fab fa-react"></i><span>React</span></div>  
-                <div class="tech-skill reveal-element" data-delay="100"><i class="fab fa-laravel"></i><span>Laravel</span></div>
-                <div class="tech-skill reveal-element" data-delay="150"><i class="fas fa-code"></i><span>TypeScript</span></div>
-                <div class="tech-skill reveal-element" data-delay="200"><i class="fab fa-php"></i><span>PHP</span></div>
-                <div class="tech-skill reveal-element" data-delay="250"><i class="fab fa-git-alt"></i><span>Git</span></div>
-                <div class="tech-skill reveal-element" data-delay="300"><i class="fab fa-java"></i><span>Java</span></div>
-                <div class="tech-skill reveal-element" data-delay="350"><i class="fab fa-js"></i><span>JavaScript</span></div>
-                <div class="tech-skill reveal-element" data-delay="400"><i class="fas fa-database"></i><span>MySQL</span></div>
-                <div class="tech-skill reveal-element" data-delay="450"><i class="fab fa-microsoft"></i><span>.NET</span></div>
-                <div class="tech-skill reveal-element" data-delay="500"><i class="fab fa-node-js"></i><span>NodeJS</span></div>
-                <div class="tech-skill reveal-element" data-delay="550"><i class="fas fa-network-wired"></i><span>NoSQL</span></div>
-                <div class="tech-skill reveal-element" data-delay="600"><i class="fas fa-database"></i><span>Oracle</span></div>             
-              </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="0">
+                        <i class="fab fa-angular text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">Angular</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="50">
+                        <i class="fab fa-react text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">React</span>
+                    </div>  
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="100">
+                        <i class="fab fa-laravel text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">Laravel</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="150">
+                        <i class="fas fa-code text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">TypeScript</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="200">
+                        <i class="fab fa-php text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">PHP</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="250">
+                        <i class="fab fa-git-alt text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">Git</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="300">
+                        <i class="fab fa-java text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">Java</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="350">
+                        <i class="fab fa-js text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">JavaScript</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="400">
+                        <i class="fas fa-database text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">MySQL</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="450">
+                        <i class="fab fa-microsoft text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">.NET</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="500">
+                        <i class="fab fa-node-js text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">NodeJS</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="550">
+                        <i class="fas fa-network-wired text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">NoSQL</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:-translate-y-1 reveal-element" data-delay="600">
+                        <i class="fas fa-database text-4xl text-blue-600 mb-2"></i>
+                        <span class="font-medium">Oracle</span>
+                    </div>             
+                </div>
             </div>
         </section>                   
 
         <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="container">
-              <h2 class="section-title reveal-element"><i class="fas fa-folder-open"></i> Projects</h2>
-              <div class="section-underline reveal-element"></div>
+        <section id="projects" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 reveal-element"><i class="fas fa-folder-open mr-2"></i> Projects</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-12 reveal-element"></div>
           
-              <div class="projects-grid">
-                <!-- Project Card 4 -->
-                <div class="project-card reveal-element">
-                  <div class="project-header">
-                    <h3><i class="fas fa-user-shield"></i> Human Resource Management System (HRMS)</h3>
-                    <div class="project-tags">
-                      <span class="project-tag">🅰️ Angular</span>
-                      <span class="project-tag">🎯 Laravel</span>
-                      <span class="project-tag">📊 SQL</span>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 4 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-user-shield text-blue-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Human Resource Management System (HRMS)</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🅰️ Angular</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🎯 Laravel</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">📊 SQL</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                Enterprise-grade HR system built in 2025. Features include employee tracking, attendance, payroll, and leave handling.
+                            </p>
+                            <p class="text-gray-600 text-sm mb-4">
+                                <strong>Responsibilities:</strong> Backend & Frontend Dev, API Integration
+                            </p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-code-branch mr-2"></i> View Repository
+                            </a>
+                        </div>
                     </div>
-                  </div>
-                  <p class="description">
-                    Enterprise-grade HR system built in 2025. Features include employee tracking, attendance, payroll, and leave handling.
-                  </p>
-                  <p class="technologies">
-                    <strong>Responsibilities:</strong> Backend & Frontend Dev, API Integration
-                  </p>
-                  <div class="project-links">
-                    <a href="#" class="project-link">
-                      <i class="fas fa-code-branch"></i> View Repository
-                    </a>
-                  </div>
-                </div>
-                
-                <!-- Project Card 2 -->
-                <div class="project-card reveal-element" data-delay="100">
-                  <div class="project-header">
-                    <h3><i class="fas fa-users-cog"></i> Employee Management System (EMS)</h3>
-                    <div class="project-tags">
-                      <span class="project-tag">💻 PHP</span>
-                      <span class="project-tag">🛢️ SQL</span>
-                      <span class="project-tag">🔁 Full Stack</span>
+                    
+                    <!-- Project Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element" data-delay="100">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-users-cog text-blue-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Employee Management System (EMS)</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">💻 PHP</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🛢️ SQL</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🔁 Full Stack</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                A comprehensive HR tool from Aug–Oct 2024 for managing records, attendance, and reports.
+                            </p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-code mr-2"></i> View Project
+                            </a>
+                        </div>
                     </div>
-                  </div>
-                  <p class="description">
-                    A comprehensive HR tool from Aug–Oct 2024 for managing records, attendance, and reports.
-                  </p>
-                  <div class="project-links">
-                    <a href="#" class="project-link">
-                      <i class="fas fa-code"></i> View Project
-                    </a>
-                  </div>
-                </div>
-                
-                <!-- Project Card 3 -->
-                <div class="project-card reveal-element" data-delay="200">
-                  <div class="project-header">
-                    <h3><i class="fas fa-search"></i> Image Search Web App</h3>
-                    <div class="project-tags">
-                      <span class="project-tag">🧠 JavaScript</span>
-                      <span class="project-tag">🔌 API</span>
+                    
+                    <!-- Project Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element" data-delay="200">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-search text-blue-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Image Search Web App</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🧠 JavaScript</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🔌 API</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                A responsive frontend app that integrates APIs to search and render high-quality images in real-time.
+                            </p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-eye mr-2"></i> Preview
+                            </a>
+                        </div>
                     </div>
-                  </div>
-                  <p class="description">
-                    A responsive frontend app that integrates APIs to search and render high-quality images in real-time.
-                  </p>
-                  <div class="project-links">
-                    <a href="#" class="project-link">
-                      <i class="fas fa-eye"></i> Preview
-                    </a>
-                  </div>
-                </div>
-                
-                <!-- Project Card 1 -->
-                <div class="project-card reveal-element" data-delay="300">
-                  <div class="project-header">
-                    <h3><i class="fas fa-globe-asia"></i> WikiCeylon.com</h3>
-                    <div class="project-tags">
-                      <span class="project-tag">🌐 Web</span>
-                      <span class="project-tag">📚 Content</span>
-                      <span class="project-tag live">🟢 Live</span>
+                    
+                    <!-- Project Card 1 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element" data-delay="300">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-globe-asia text-blue-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">WikiCeylon.com</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🌐 Web</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">📚 Content</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">🟢 Live</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                A platform with rich and categorized information about Sri Lanka, covering culture, history, tourism, and current events.
+                            </p>
+                            <a href="https://wikiceylon.com" class="inline-flex items-center text-blue-600 hover:text-blue-800" target="_blank">
+                                <i class="fas fa-external-link-alt mr-2"></i> Visit Site
+                            </a>
+                        </div>
                     </div>
-                  </div>
-                  <p class="description">
-                    A platform with rich and categorized information about Sri Lanka, covering culture, history, tourism, and current events.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://wikiceylon.com" class="project-link" target="_blank">
-                      <i class="fas fa-external-link-alt"></i> Visit Site
-                    </a>
-                  </div>
-                </div>
-                
-                <!-- Project Card 5: Kalana.lk -->
-                <div class="project-card reveal-element" data-delay="400">
-                  <div class="project-header">
-                    <h3><i class="fas fa-shopping-bag"></i> Kalana.lk</h3>
-                    <div class="project-tags">
-                      <span class="project-tag">🛒 E-Commerce</span>
-                      <span class="project-tag live">🟢 Live</span>
+                    
+                    <!-- Project Card 5: Kalana.lk -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element" data-delay="400">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-shopping-bag text-blue-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Kalana.lk</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🛒 E-Commerce</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">🟢 Live</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                Kalana.lk is a dynamic e-commerce platform offering a wide range of products with a secure and seamless online shopping experience.
+                            </p>
+                            <a href="https://kalana.lk" class="inline-flex items-center text-blue-600 hover:text-blue-800" target="_blank">
+                                <i class="fas fa-external-link-alt mr-2"></i> Visit Site
+                            </a>
+                        </div>
                     </div>
-                  </div>
-                  <p class="description">
-                    Kalana.lk is a dynamic e-commerce platform offering a wide range of products with a secure and seamless online shopping experience.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://kalana.lk" class="project-link" target="_blank">
-                      <i class="fas fa-external-link-alt"></i> Visit Site
-                    </a>
-                  </div>
-                </div>
-                
-                <!-- Project Card 6: Ultimate.lk -->
-                <div class="project-card reveal-element" data-delay="500">
-                  <div class="project-header">
-                    <h3><i class="fas fa-shopping-cart"></i> Ultimate.lk</h3>
-                    <div class="project-tags">
-                      <span class="project-tag">🛍️ E-Commerce</span>
-                      <span class="project-tag live">🟢 Live</span>
+                    
+                    <!-- Project Card 6: Ultimate.lk -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-element" data-delay="500">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-shopping-cart text-blue-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Ultimate.lk</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">🛍️ E-Commerce</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">🟢 Live</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                Ultimate.lk is a robust online store providing a diverse selection of products, optimized for user experience and secure transactions.
+                            </p>
+                            <a href="https://ultimate.lk" class="inline-flex items-center text-blue-600 hover:text-blue-800" target="_blank">
+                                <i class="fas fa-external-link-alt mr-2"></i> Visit Site
+                            </a>
+                        </div>
                     </div>
-                  </div>
-                  <p class="description">
-                    Ultimate.lk is a robust online store providing a diverse selection of products, optimized for user experience and secure transactions.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://ultimate.lk" class="project-link" target="_blank">
-                      <i class="fas fa-external-link-alt"></i> Visit Site
-                    </a>
-                  </div>
                 </div>
-              </div>
             </div>
         </section>                    
 
         <!-- Interests Section -->
-        <section id="interests" class="section">
-            <div class="container">
-              <h2 class="section-title reveal-element"><i class=""></i> Interests</h2>
-              <div class="section-underline reveal-element"></div>
+        <section id="interests" class="py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 reveal-element">Interests</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-12 reveal-element"></div>
           
-              <div class="interests-grid">
-                <!-- Video Games -->
-                <div class="interest-card reveal-element">
-                  <div class="interest-icon"><i class="fas fa-gamepad"></i></div>
-                  <h3>Video Games</h3>
-                  <p>Gaming is my favorite escape. I enjoy both story-driven adventures and competitive multiplayer games.</p>
-                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Video Games -->
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 reveal-element">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Video Games</h3>
+                        <p class="text-gray-600">Gaming is my favorite escape. I enjoy both story-driven adventures and competitive multiplayer games.</p>
+                    </div>
           
-                <!-- Cricket -->
-                <div class="interest-card reveal-element" data-delay="100">
-                  <div class="interest-icon"><i class="fas fa-baseball-ball"></i></div>
-                  <h3>Cricket</h3>
-                  <p>Cricket is more than a game to me—it's a passion. I play and watch matches whenever I can.</p>
-                </div>
+                    <!-- Cricket -->
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 reveal-element" data-delay="100">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4">
+                            <i class="fas fa-baseball-ball"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Cricket</h3>
+                        <p class="text-gray-600">Cricket is more than a game to me—it's a passion. I play and watch matches whenever I can.</p>
+                    </div>
           
-                <!-- Movies -->
-                <div class="interest-card reveal-element" data-delay="200">
-                  <div class="interest-icon"><i class="fas fa-film"></i></div>
-                  <h3>Movies</h3>
-                  <p>I love watching movies, especially thrillers and classics. "The Shawshank Redemption" remains a favorite.</p>
-                </div>
+                    <!-- Movies -->
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 reveal-element" data-delay="200">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Movies</h3>
+                        <p class="text-gray-600">I love watching movies, especially thrillers and classics. "The Shawshank Redemption" remains a favorite.</p>
+                    </div>
           
-                <!-- Music -->
-                <div class="interest-card reveal-element" data-delay="300">
-                  <div class="interest-icon"><i class="fas fa-headphones-alt"></i></div>
-                  <h3>Music</h3>
-                  <p>Music keeps me focused and inspired—whether it's chill lo-fi beats or energetic pop anthems.</p>
+                    <!-- Music -->
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 reveal-element" data-delay="300">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4">
+                            <i class="fas fa-headphones-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Music</h3>
+                        <p class="text-gray-600">Music keeps me focused and inspired—whether it's chill lo-fi beats or energetic pop anthems.</p>
+                    </div>
                 </div>
-              </div>
             </div>
         </section>          
     </main>
